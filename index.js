@@ -9,29 +9,6 @@ const express = require("express");
 const http = require("http");
 const https = require("https");
 
-// ---------- SIMPLE MOVEMENT ----------
-// Move straight forward for about 10 blocks every 3 minutes.
-addInterval(() => {
-  if (
-    !bot ||
-    !botState.connected ||
-    typeof bot.setControlState !== "function"
-  ) return;
-
-  try {
-    bot.setControlState("forward", true);
-    botState.lastActivity = Date.now();
-    addLog("[Movement] Walking straight forward for about 10 blocks...");
-
-    setTimeout(() => {
-      if (bot && typeof bot.setControlState === "function") {
-        bot.setControlState("forward", false);
-      }
-    }, 2500);
-  } catch (e) {
-    addLog("[Movement] Walk error: " + e.message);
-  }
-}, 3 * 60 * 1000);
 // ============================================================
 // EXPRESS SERVER - Keep Render/Aternos alive
 // ============================================================
